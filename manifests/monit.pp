@@ -7,6 +7,7 @@ class monit {
 		ensure => running,
 		enable => true,
 		hasrestart => true,
+		require => Package['monit'],
 	}
 
 	file { '/etc/monit/monitrc':
@@ -33,6 +34,7 @@ class monit {
 		group => root,
 		ensure => directory,
 		notify => Service['monit'],
+		require => Package['monit'],
 	}
 	file { '/etc/monit/conf.d':
 		mode => 755,
