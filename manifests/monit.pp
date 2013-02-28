@@ -69,3 +69,14 @@ define monit::bindcheck ($bind_ips) {
 		require => File['/etc/monit/conf.d'],
 	}
 }
+
+define monit::clamdcheck ($clamd_port=3310, $clamd_ips=[]) {
+	file { "/etc/monit/conf.d/$name":
+		mode => 600,
+		owner => root,
+		group => root,
+		content => template("/etc/puppet/modules/monit/templates/clamd.erb"),
+		notify => Service['monit'],
+		require => File['/etc/monit/conf.d'],
+	}
+}
