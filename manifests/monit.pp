@@ -18,6 +18,15 @@ class monit {
 		require => File['/etc/monit'],
 	}
 
+	file { '/etc/default/monit':
+		mode => 644,
+		owner => root,
+		group => root,
+		content => template("/etc/puppet/modules/monit/templates/default.erb"),
+		notify => Service['monit'],
+		require => Package['monit'],
+	}
+
 	file { '/etc/monit/':
 		mode => 755,
 		owner => root,
