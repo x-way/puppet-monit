@@ -91,3 +91,14 @@ define monit::clamdcheck ($clamd_port=3310, $clamd_ips=[]) {
 		require => File['/etc/monit/conf.d'],
 	}
 }
+
+define monit::sshdcheck ($sshd_port=22, $sshd_ips=[]) {
+	file { "/etc/monit/conf.d/$name":
+		mode => 600,
+		owner => root,
+		group => root,
+		content => template("/etc/puppet/modules/monit/templates/sshd.erb"),
+		notify => Service['monit'],
+		require => File['/etc/monit/conf.d'],
+	}
+}
