@@ -49,7 +49,7 @@ class monit {
 	monit::sshdcheck { "sshdcheck_${fqdn}": }
 }
 
-define monit::options ($interval, $mailserver, $email, $http_address, $http_allow, $http_user, $http_password) {
+define monit::options ($interval = 180, $mailserver = undef, $email = undef, $http_address = undef, $http_allow = undef, $http_user = undef, $http_password = undef) {
 	file { "/etc/monit/conf.d/options_$name":
 		mode => 600,
 		owner => root,

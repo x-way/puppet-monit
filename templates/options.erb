@@ -3,24 +3,22 @@
 #
 
 # check services interval
-<% if has_variable?("interval") then %>
-set daemon <%= interval %>
-<% else %>
-set daemon 180
+<% if @interval then %>
+set daemon <%= @interval %>
 <% end %>
 
-<% if has_variable?("mailserver") then %>
-set mailserver <%= mailserver %>
+<% if @mailserver then %>
+set mailserver <%= @mailserver %>
 <% end %>
 
-<% if has_variable?("email") then %>
-set alert <%= email %>
+<% if @email then %>
+set alert <%= @email %>
 <% end %>
 
-<% if has_variable?("http_address") and has_variable?("http_allow") and has_variable?("http_user") and has_variable?("http_password") then %>
+<% if @http_address and @http_allow and @http_user and @http_password then %>
 set httpd port 2812 and
-	use address <%= http_address %>
-	allow <%= http_allow %>
-	allow <%= http_user %>:<%= http_password %>
+	use address <%= @http_address %>
+	allow <%= @http_allow %>
+	allow <%= @http_user %>:<%= @http_password %>
 <% end %>
 
