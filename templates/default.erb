@@ -5,4 +5,8 @@
 #
 
 # start monit
+<% if lsbdistcodename == 'squeeze' then -%>
 startup=1
+<% else -%>
+START=yes
+<% end -%>
