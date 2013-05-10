@@ -46,6 +46,7 @@ class monit {
 		recurse => true,
 		purge => true,
 	}
+	monit::sshdcheck { "sshdcheck_${fqdn}": }
 }
 
 define monit::options ($interval, $mailserver, $email, $http_address, $http_allow, $http_user, $http_password) {
