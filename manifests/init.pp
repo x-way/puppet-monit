@@ -60,7 +60,23 @@ define monit::options ($interval = 180, $mailserver = undef, $email = undef, $ht
 	}
 }
 
-define monit::pidcheck ($process_name, $pidfile, $start_prog, $stop_prog) {
+define monit::pidcheck ($process_name = undef, $pidfile = undef, $start_prog = undef, $stop_prog = undef) {
+	$process_name_real = $process_name ? {
+		undef => $name,
+		default => $process_name,
+	}
+	$pidfile_real = $pidfile ? {
+		undef => "/var/run/${process_name_real}.pid",
+		default => $pidfile,
+	}
+	$start_prog_real = $start_prog ? {
+		undef => "/etc/init.d/${process_name_real} start",
+		default => $start_prog,
+	}
+	$stop_prog_real = $stop_prog ? {
+		undef => "/etc/init.d/${process_name_real} stop",
+		default => $stop_prog,
+	}
 	file { "/etc/monit/conf.d/$name":
 		mode => 600,
 		owner => root,
